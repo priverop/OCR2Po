@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+    <PackageReference Include="Tesseract" Version="5.2.0" />
+    <PackageReference Include="Yarhl" Version="4.0.0" />
+  </ItemGroup>
+
+  <!-- put a bunch of shared objects in a place where Tesseract can find them -->
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Linux'))">
+    <None Include="/usr/lib/x86_64-linux-gnu/liblept.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>x64/libleptonica-1.82.0.so</TargetPath>
+    </None>
+    <None Include="/usr/lib/x86_64-linux-gnu/libdl.so.2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>libdl.so</TargetPath>
+    </None>
+    <None Include="/usr/lib/x86_64-linux-gnu/libtesseract.so.5">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>x64/libtesseract50.so</TargetPath>
+    </None>
+  </ItemGroup>
+
+</Project>
