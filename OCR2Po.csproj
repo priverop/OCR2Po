@@ -11,6 +11,7 @@
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
     <PackageReference Include="Tesseract" Version="5.2.0" />
     <PackageReference Include="Yarhl" Version="4.0.0" />
+    <PackageReference Include="Yarhl.Media.Text" Version="4.0.0" />
   </ItemGroup>
 
   <!-- put a bunch of shared objects in a place where Tesseract can find them -->
