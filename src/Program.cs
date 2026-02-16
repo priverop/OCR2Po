@@ -42,7 +42,7 @@ namespace OCR2PO
 
             BinaryFormat binaryPo = texts.TransformWith<Text2Po>()
                 .TransformWith<Po2Binary>()
-                .GetFormatAs<BinaryFormat>();
+                .GetFormatAs<BinaryFormat>()!;
             
             binaryPo!.Stream.WriteTo("OCR.po");
         }

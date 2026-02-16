@@ -44,7 +44,7 @@ namespace OCR2PO.Converters
             var text = new ImageText();
             byte[] buffer = reader.ReadBytes((int)source.Stream.Length);
 
-            using (var engine = new TesseractEngine(@"./tessdata", "jpn", EngineMode.LstmOnly))
+            using (var engine = new TesseractEngine(@"./tessdata", "jpn_best", EngineMode.LstmOnly))
             {
                 using var img = Pix.LoadFromMemory(buffer);
                 using var page = engine.Process(img);

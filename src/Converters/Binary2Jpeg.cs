@@ -28,7 +28,7 @@ namespace OCR2PO.Converters
     /// <summary>
     /// Converts between a regular binary file and an ImageSharp Jpeg.
     /// </summary>
-    /// <remarks>Image colors are reversed, and the image is resized.</remarks>
+    /// <remarks>Image colors are reversed, converted to grayscale, and resized for better OCR.</remarks>
     public class Binary2Jpeg :
         IConverter<IBinary, Jpeg>
     {
@@ -45,10 +45,17 @@ namespace OCR2PO.Converters
             var processedImage = new Jpeg();
             using (Image<Rgba32> image = Image.Load<Rgba32>(source.Stream))
             {
-                // Invert colors and resize
-                image.Mutate(x => x.Invert());
-                image.Mutate(x => x.Resize(image.Width * 20, image.Height * 20));
-                image.SaveAsJpeg(processedImage.Stream);
+                image.Mutate(x => x
+                    // Invert colors first
+                    .Invert()
+                    // Convert to grayscale to reduce color noise
+                    .Grayscale()
+                    // Resize
+                    .Resize(image.Width * 3, image.Height * 3)
+                    // Apply binary threshold for better text/background separation
+                    .BinaryThreshold(0.5f)
+                );
+                image.SaveAsPng(processedImage.Stream);
             } 
 
             return processedImage;

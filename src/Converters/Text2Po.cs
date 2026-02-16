@@ -45,6 +45,11 @@ namespace OCR2PO.Converters
             {
                 ImageText imageText = item.GetFormatAs<ImageText>();
 
+                if (imageText == null || string.IsNullOrWhiteSpace(imageText.Text))
+                {
+                    continue;
+                }
+
                 po.Add(new PoEntry(imageText.Text) {
                     Context = item.Name,
                 });
