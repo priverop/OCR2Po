@@ -44,13 +44,9 @@ namespace OCR2PO.Converters
             foreach (Node item in source.Root.Children)
             {
                 ImageText imageText = item.GetFormatAs<ImageText>()!;
+                string text = string.IsNullOrWhiteSpace(imageText.Text) ? "<error!>" : imageText.Text.TrimEnd();
 
-                if (imageText == null || string.IsNullOrWhiteSpace(imageText.Text))
-                {
-                    continue;
-                }
-
-                po.Add(new PoEntry(imageText.Text) {
+                po.Add(new PoEntry(text) {
                     Context = item.Name,
                 });
             }

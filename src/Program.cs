@@ -10,42 +10,33 @@ namespace OCR2PO
     {
         static int Main(string[] args)
         {
-
-//TODO:  outputPath
-            if (args.Length < 1) {
-                Console.WriteLine("Wrong number of arguments. Usage: OCR2PO dirPath");
+            if (args.Length < 2) {
+                Console.WriteLine("Wrong number of arguments. Usage: OCR2PO <dirPath> <outputPath>");
                 return 1;
         }
 
             string inputPath = args[0];
+            string outputPath = args[1];
 
-            OCR2Po(inputPath);
+            OCR2Po(inputPath, outputPath);
             return 0;
         }
 
-        static void OCR2Po(string inputPath)
+        static void OCR2Po(string inputPath, string outputPath)
         {
-            var texts = new Node("ncf", new NodeContainerFormat());
-            var inputFiles = NodeFactory.FromDirectory(inputPath, "*.png");
+            using var inputFiles = NodeFactory.FromDirectory(inputPath, "*.png", FileOpenMode.Read);
 
-            foreach (Node file in inputFiles.Children.ToArray())
-            {
-                Console.WriteLine($"Processing {file.Name}:");
+            // Transform each node to text
+            inputFiles.Children
+                .TransformCollectionWith(new Binary2Jpeg())
+                .TransformCollectionWith(new Jpeg2Text());
 
-                file.TransformWith<Binary2Jpeg>()
-                    .TransformWith<Jpeg2Text>();
+            // Group the collection into a single PO and write to disk
+            inputFiles.TransformWith(new Text2Po())
+                .TransformWith(new Po2Binary())
+                .Stream!.WriteTo(Path.Combine(outputPath, "OCR.po"));
 
-                Console.WriteLine($"Extracted text from {file.Name}.");
-
-                texts.Add(file);
-                Console.WriteLine("");
-            }
-
-            BinaryFormat binaryPo = texts.TransformWith<Text2Po>()
-                .TransformWith<Po2Binary>()
-                .GetFormatAs<BinaryFormat>()!;
-            
-            binaryPo!.Stream.WriteTo("OCR.po");
+            Console.WriteLine("Done!");
         }
     }
 }
