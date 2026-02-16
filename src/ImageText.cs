@@ -29,6 +29,6 @@ namespace OCR2PO.Converters
         /// <summary>
         /// Gets or sets the text of the image.
         /// </summary>
-        public string Text { get; set; }
+        public string Text { get; set; } = string.Empty;
     }
 }
