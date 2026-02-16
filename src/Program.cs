@@ -38,6 +38,7 @@ namespace OCR2PO
                 Console.WriteLine($"Extracted text from {file.Name}.");
 
                 texts.Add(file);
+                Console.WriteLine("");
             }
 
             BinaryFormat binaryPo = texts.TransformWith<Text2Po>()

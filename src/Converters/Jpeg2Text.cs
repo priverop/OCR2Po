@@ -49,7 +49,7 @@ namespace OCR2PO.Converters
                 using var img = Pix.LoadFromMemory(buffer);
                 using var page = engine.Process(img);
                 text.Text = page.GetText();
-                Console.WriteLine(text.Text);
+                Console.WriteLine(text.Text.TrimEnd());
             }
 
             return text;
