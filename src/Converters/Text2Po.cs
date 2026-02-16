@@ -43,7 +43,7 @@ namespace OCR2PO.Converters
 
             foreach (Node item in source.Root.Children)
             {
-                ImageText imageText = item.GetFormatAs<ImageText>();
+                ImageText imageText = item.GetFormatAs<ImageText>()!;
 
                 if (imageText == null || string.IsNullOrWhiteSpace(imageText.Text))
                 {
