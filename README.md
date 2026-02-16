@@ -1,6 +1,12 @@
 # OCR2Po
 
-Humble attempt to read images into a Po file.
+Reads text from images with Tesseract OCR, and transform them into a single Po file.
+
+## Limitations
+
+The OCR library is not very accurate, but I couldn't find better options. 
+
+The image preprocessing in `Jpeg2Text` could be improven.
 
 ## Credits
 
