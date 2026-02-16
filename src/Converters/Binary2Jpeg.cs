@@ -26,23 +26,23 @@ using Yarhl.IO;
 namespace OCR2PO.Converters
 {
     /// <summary>
-    /// Converts between a regular binary file and an ImageSharp Jpeg.
+    /// Converts between a regular binary file and an ImageSharp Png.
     /// </summary>
     /// <remarks>Image colors are reversed, converted to grayscale, and resized for better OCR.</remarks>
-    public class Binary2Jpeg :
-        IConverter<IBinary, Jpeg>
+    public class Binary2Png :
+        IConverter<IBinary, Png>
     {
         /// <summary>
-        /// Converts any IBinary to a Jpeg.
+        /// Converts any IBinary to a Png.
         /// </summary>
         /// <param name="source">IBinary node.</param>
-        /// <returns>Jpeg binaryFormat.</returns>
-        public Jpeg Convert(IBinary source)
+        /// <returns>Png binaryFormat.</returns>
+        public Png Convert(IBinary source)
         {
             ArgumentNullException.ThrowIfNull(source);
 
             source.Stream.Position = 0;
-            var processedImage = new Jpeg();
+            var processedImage = new Png();
             using (Image<Rgba32> image = Image.Load<Rgba32>(source.Stream))
             {
                 image.Mutate(x => x

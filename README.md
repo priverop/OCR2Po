@@ -6,7 +6,7 @@ Reads text from images with Tesseract OCR, and transform them into a single Po f
 
 The OCR library is not very accurate, but I couldn't find better options. 
 
-The image preprocessing in `Jpeg2Text` could be improven.
+The image preprocessing in `Png2Text` could be improven.
 
 ## Credits
 

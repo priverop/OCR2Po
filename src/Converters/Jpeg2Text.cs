@@ -24,18 +24,18 @@ using Yarhl.IO;
 namespace OCR2PO.Converters
 {
     /// <summary>
-    /// Converts between an ImageSharp Jpeg (BinaryFormat), and a string.
+    /// Converts between an ImageSharp Png (BinaryFormat), and a string.
     /// </summary>
     /// <remarks>Uses Tesseract OCR to read the images.</remarks>
-    public class Jpeg2Text :
-        IConverter<Jpeg, ImageText>
+    public class Png2Text :
+        IConverter<Png, ImageText>
     {
         /// <summary>
-        /// Converts the Jpeg to a string.
+        /// Converts the Png to a string.
         /// </summary>
-        /// <param name="source">Jpeg format.</param>
+        /// <param name="source">Png format.</param>
         /// <returns>String with the text.</returns>
-        public ImageText Convert(Jpeg source)
+        public ImageText Convert(Png source)
         {
             ArgumentNullException.ThrowIfNull(source);
 

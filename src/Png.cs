@@ -22,7 +22,7 @@ using Yarhl.IO;
 
 namespace OCR2PO.Converters
 {
-    public class Jpeg : BinaryFormat
+    public class Png : BinaryFormat
     {
     }
 }

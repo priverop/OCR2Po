@@ -28,8 +28,8 @@ namespace OCR2PO
 
             // Transform each node to text
             inputFiles.Children
-                .TransformCollectionWith(new Binary2Jpeg())
-                .TransformCollectionWith(new Jpeg2Text());
+                .TransformCollectionWith(new Binary2Png())
+                .TransformCollectionWith(new Png2Text());
 
             // Group the collection into a single PO and write to disk
             inputFiles.TransformWith(new Text2Po())

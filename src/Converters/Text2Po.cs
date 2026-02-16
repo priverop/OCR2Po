@@ -19,7 +19,6 @@
 // SOFTWARE.
 using Yarhl.FileFormat;
 using Yarhl.FileSystem;
-using Yarhl.IO;
 using Yarhl.Media.Text;
 
 namespace OCR2PO.Converters
